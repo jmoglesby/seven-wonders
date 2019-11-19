@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_19_204515) do
+ActiveRecord::Schema.define(version: 2019_11_19_232806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,12 @@ ActiveRecord::Schema.define(version: 2019_11_19_204515) do
     t.integer "creator_user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "teams"
+    t.boolean "leaders_expansion"
+    t.boolean "cities_expansion"
+    t.boolean "babel_tower_expansion"
+    t.boolean "babel_projects_expansion"
+    t.boolean "armada_expansion"
   end
 
   create_table "game_sessions_users", force: :cascade do |t|
