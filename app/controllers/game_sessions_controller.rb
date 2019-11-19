@@ -42,8 +42,8 @@ class GameSessionsController < ApplicationController
   # PATCH/PUT /game_sessions/1.json
   def update
     respond_to do |format|
+      @game_session.players << User.find(current_user.id) if @game_session.players.count < 8
       if @game_session.update(game_session_params)
-        @game_session.players << User.find(current_user.id)
         format.html { redirect_to @game_session, notice: 'Game session was successfully updated.' }
         format.json { render :show, status: :ok, location: @game_session }
       else
@@ -63,7 +63,8 @@ class GameSessionsController < ApplicationController
     end
   end
 
-  private
+  private # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     # Use callbacks to share common setup or constraints between actions.
     def set_game_session
       @game_session ||= GameSession.find(params[:id])
@@ -71,6 +72,14 @@ class GameSessionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_session_params
-      params.fetch(:game_session, {}).permit(:creator_user_id)
+      params.fetch(:game_session, {}).permit(
+        :creator_user_id,
+        :teams,
+        :leaders_expansion,
+        :cities_expansion,
+        :babel_tower_expansion,
+        :babel_projects_expansion,
+        :armada_expansion
+      )
     end
 end

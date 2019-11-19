@@ -10,7 +10,30 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="field">
+    <%= form.check_box :leaders_expansion %>
+    <%= form.label :leaders_expansion, "Use Leaders" %>
+  </div>
+  <div class="field">
+    <%= form.check_box :cities_expansion %>
+    <%= form.label :cities_expansion, "Use Cities" %>
+  </div>
+  <div class="field">
+    <%= form.check_box :babel_tower_expansion %>
+    <%= form.label :babel_tower_expansion, "Use Babel Tower" %>
+  </div>
+  <div class="field">
+    <%= form.check_box :babel_projects_expansion %>
+    <%= form.label :babel_projects_expansion, "Use Babel Great Projects" %>
+  </div>
+  <div class="field">
+    <%= form.check_box :armada_expansion %>
+    <%= form.label :armada_expansion, "Use Armada" %>
+  </div>
+  <div class="field">
+    <%= form.check_box :teams %>
+    <%= form.label :teams, "Team Game" %>
+  </div>
   <div class="actions">
     <%= form.submit %>
   </div>
