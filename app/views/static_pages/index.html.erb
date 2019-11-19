@@ -1,3 +1,6 @@
 <h1>StaticPages#index</h1>
 <p>Find me in app/views/static_pages/index.html.erb</p>
 <button class="btn btn-primary">test</button>
+
+<%= link_to 'Login', new_user_session_path %>
+<%= link_to 'Logout', destroy_user_session_path, method: :delete %>
