@@ -10,10 +10,12 @@ class ScoreCardsController < ApplicationController
       score_card_params.merge(user_id: current_user.id)
     )
 
-    if @score_card.valid?
-      redirect_to game_session_path(@game_session)
-    else
-      render :new
+    respond_to do |format|
+      if @score_card.valid?
+        format.html { redirect_to game_session_path(@game_session) }
+      else
+        format.html { render :new }
+      end
     end
   end
 
