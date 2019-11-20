@@ -1,4 +1,13 @@
 <h2>Game ID: <%= @game_session.id %></h2>
-<h4>Created By: <%= @game_session.creator_user_id %></h4>
+<h4>Created By: <%= @game_session.creator.email %></h4>
+
+<div>
+  <ul>
+    <% @game_session.players.each do |player| %>
+      <li><%= player.email %></li>
+    <% end %>
+  </ul>
+</div>
+
 <%= link_to 'Edit', edit_game_session_path(@game_session) %> |
 <%= link_to 'Back', game_sessions_path %>
