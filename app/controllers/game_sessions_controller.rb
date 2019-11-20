@@ -1,6 +1,6 @@
 class GameSessionsController < ApplicationController
-  before_action :set_game_session, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :set_game_session, only: [:show, :edit, :update, :destroy]
 
   # GET /game_sessions
   # GET /game_sessions.json
@@ -25,11 +25,11 @@ class GameSessionsController < ApplicationController
   # POST /game_sessions
   # POST /game_sessions.json
   def create
-    @game_session = GameSession.new(game_session_params.merge(creator_user_id: current_user.id))
+    @game_session = current_user.games.create(game_session_params)
     @game_session.players << User.find(current_user.id)
 
     respond_to do |format|
-      if @game_session.save
+      if @game_session.valid?
         format.html { redirect_to @game_session, notice: 'Game session was successfully created.' }
         format.json { render :show, status: :created, location: @game_session }
       else

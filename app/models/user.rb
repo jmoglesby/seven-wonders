@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable
 
-  has_many :games, class_name: "GameSession", foreign_key: "creator_user_id"
-  has_and_belongs_to_many :game_sessions
+  has_many :game_sessions, foreign_key: "creator_user_id"
+  has_and_belongs_to_many :games, class_name: "GameSession"
   has_many :score_cards
 end
