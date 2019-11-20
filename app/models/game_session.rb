@@ -4,7 +4,7 @@ class GameSession < ApplicationRecord
   has_many :score_cards, dependent: :destroy
 
   # Scopes
-  scope :complete, -> { where() } # TODO: finish scope
+  scope :completed_games, -> { where() } # TODO: finish scope
 
   # Properties
   def creator
@@ -18,5 +18,9 @@ class GameSession < ApplicationRecord
     expansions << :babel_tower    if self.babel_tower_expansion
     expansions << :babel_projects if self.babel_projects_expansion
     expansions << :armada         if self.armada_expansion
+  end
+
+  def completed?
+    players.count == score_cards.count
   end
 end
