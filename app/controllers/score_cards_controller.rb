@@ -9,6 +9,12 @@ class ScoreCardsController < ApplicationController
     @score_card = @game_session.score_cards.create(
       score_card_params.merge(user_id: current_user.id)
     )
+
+    if @score_card.valid?
+      redirect_to game_session_path(@game_session)
+    else
+      render :new
+    end
   end
 
   private # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

@@ -1,0 +1,26 @@
+<%= form_with(model: [@game_session, @score_card], local: true) do |form| %>
+  <% if @score_card.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@score_card.errors.count, "error") %> prohibited this Score Card from being saved:</h2>
+
+      <ul>
+        <% @score_card.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="container score-fields">
+    <div class="field">
+      <%= form.label :plus_one_military_victory_tokens, "Total +1 Military Victory Tokens" %>
+      <br/>
+      <small class="text-muted">Include both land and naval victory tokens</small>
+      <br/>
+      <%= form.number_field :plus_one_military_victory_tokens, in: 0..15 %>
+    </div>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
