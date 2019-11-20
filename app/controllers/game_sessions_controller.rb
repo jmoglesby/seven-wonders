@@ -1,6 +1,6 @@
 class GameSessionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_game_session, only: [:show, :edit, :update, :destroy]
+  before_action :set_game_session, only: [:show, :edit, :update, :destroy, :add_player]
 
   # GET /game_sessions
   # GET /game_sessions.json
@@ -43,7 +43,7 @@ class GameSessionsController < ApplicationController
   # PATCH/PUT /game_sessions/1.json
   def update
     respond_to do |format|
-      @game_session.players << User.find(current_user.id) if @game_session.players.count < 8
+      add_player unless game_already_includes_player
       if @game_session.update(game_session_params)
         format.html { redirect_to @game_session, notice: 'Game session was successfully updated.' }
         format.json { render :show, status: :ok, location: @game_session }
@@ -68,21 +68,29 @@ class GameSessionsController < ApplicationController
 
   private # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_game_session
-      @game_session ||= GameSession.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_game_session
+    @game_session ||= GameSession.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def game_session_params
-      params.fetch(:game_session, {}).permit(
-        :creator_user_id,
-        :teams,
-        :leaders_expansion,
-        :cities_expansion,
-        :babel_tower_expansion,
-        :babel_projects_expansion,
-        :armada_expansion
-      )
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def game_session_params
+    params.fetch(:game_session, {}).permit(
+      :creator_user_id,
+      :teams,
+      :leaders_expansion,
+      :cities_expansion,
+      :babel_tower_expansion,
+      :babel_projects_expansion,
+      :armada_expansion
+    )
+  end
+
+  def game_already_includes_player
+    @game_session.players.include?(current_user)
+  end
+
+  def add_player
+    @game_session.players << User.find(current_user.id) if @game_session.players.count < 8
+  end
 end

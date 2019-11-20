@@ -10,4 +10,13 @@ class GameSession < ApplicationRecord
   def creator
     User.find(self.creator_user_id)
   end
+
+  def expansions
+    expansions = []
+    expansions << :leaders        if self.leaders_expansion
+    expansions << :cities         if self.cities_expansion
+    expansions << :babel_tower    if self.babel_tower_expansion
+    expansions << :babel_projects if self.babel_projects_expansion
+    expansions << :armada         if self.armada_expansion
+  end
 end
