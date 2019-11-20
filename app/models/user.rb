@@ -6,4 +6,5 @@ class User < ApplicationRecord
          :confirmable
 
   has_and_belongs_to_many :game_sessions
+  has_many :score_cards
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_19_232806) do
+ActiveRecord::Schema.define(version: 2019_11_20_000550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,38 @@ ActiveRecord::Schema.define(version: 2019_11_19_232806) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["game_session_id"], name: "index_game_sessions_users_on_game_session_id"
     t.index ["user_id"], name: "index_game_sessions_users_on_user_id"
+  end
+
+  create_table "score_cards", force: :cascade do |t|
+    t.integer "plus_one_military_victory_tokens"
+    t.integer "plus_three_military_victory_tokens"
+    t.integer "plus_five_military_victory_tokens"
+    t.integer "plus_seven_military_victory_tokens"
+    t.integer "minus_one_military_victory_tokens"
+    t.integer "minus_two_military_victory_tokens"
+    t.integer "minus_three_military_victory_tokens"
+    t.integer "coin_total"
+    t.integer "debt_total"
+    t.integer "wonder_points"
+    t.integer "blue_card_points"
+    t.integer "yellow_card_points"
+    t.integer "black_card_points"
+    t.integer "purple_card_points"
+    t.integer "tablet_symbols"
+    t.integer "cog_symbols"
+    t.integer "compass_symbols"
+    t.integer "wildcard_symbols"
+    t.integer "leader_points"
+    t.integer "fleet_points"
+    t.integer "babel_tiles_played"
+    t.integer "great_project_token_points"
+    t.integer "great_project_penalty_total"
+    t.integer "user_id"
+    t.integer "game_session_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_session_id"], name: "index_score_cards_on_game_session_id"
+    t.index ["user_id"], name: "index_score_cards_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

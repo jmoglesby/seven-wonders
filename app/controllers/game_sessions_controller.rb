@@ -1,5 +1,6 @@
 class GameSessionsController < ApplicationController
   before_action :set_game_session, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /game_sessions
   # GET /game_sessions.json
@@ -58,7 +59,9 @@ class GameSessionsController < ApplicationController
   def destroy
     @game_session.destroy
     respond_to do |format|
-      format.html { redirect_to game_sessions_url, notice: 'Game session was successfully destroyed.' }
+      format.html {
+        redirect_to game_sessions_url, notice: 'Game session was successfully destroyed.'
+      }
       format.json { head :no_content }
     end
   end
