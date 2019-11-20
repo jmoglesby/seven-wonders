@@ -3,5 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   # RESOURCES
-  resources :game_sessions
+  resources :game_sessions do
+    resources :score_cards, only: [:new, :create]
+  end
 end

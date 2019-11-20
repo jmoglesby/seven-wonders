@@ -9,5 +9,14 @@
   </ul>
 </div>
 
-<%= link_to 'Edit', edit_game_session_path(@game_session) %> |
+<div>
+  <%= link_to 'Submit Score',
+    new_game_session_score_card_path(@game_session),
+    class: 'btn btn-primary'
+  %>
+</div>
+
+<% if current_user == @game_session.creator %>
+  <%= link_to 'Edit', edit_game_session_path(@game_session) %> |
+<% end %>
 <%= link_to 'Back', game_sessions_path %>
