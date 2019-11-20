@@ -7,6 +7,7 @@ class GameSession < ApplicationRecord
   scope :complete, -> { where() } # TODO: finish scope
 
   # Properties
-  def created_by
+  def creator
+    User.find(self.creator_user_id)
   end
 end
