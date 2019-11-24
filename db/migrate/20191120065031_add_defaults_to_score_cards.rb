@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddDefaultsToScoreCards < ActiveRecord::Migration[6.0]
   def change
     change_column_default :score_cards, :plus_one_military_victory_tokens, 0

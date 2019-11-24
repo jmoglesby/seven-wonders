@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class GameSessionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_game_session, only: [:show, :edit, :update, :destroy, :add_player]
+  before_action :set_game_session, only: %i[show edit update destroy add_player]
 
   # GET /game_sessions
   # GET /game_sessions.json
@@ -10,8 +12,7 @@ class GameSessionsController < ApplicationController
 
   # GET /game_sessions/1
   # GET /game_sessions/1.json
-  def show
-  end
+  def show; end
 
   # GET /game_sessions/new
   def new
@@ -19,13 +20,12 @@ class GameSessionsController < ApplicationController
   end
 
   # GET /game_sessions/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /game_sessions
   # POST /game_sessions.json
   def create
-    @game_session = current_user.games.create(game_session_params)
+    @game_session = current_user.game_sessions.create(game_session_params)
     @game_session.players << User.find(current_user.id)
 
     respond_to do |format|
@@ -59,9 +59,9 @@ class GameSessionsController < ApplicationController
   def destroy
     @game_session.destroy
     respond_to do |format|
-      format.html {
+      format.html do
         redirect_to game_sessions_url, notice: 'Game session was successfully destroyed.'
-      }
+      end
       format.json { head :no_content }
     end
   end
@@ -91,6 +91,8 @@ class GameSessionsController < ApplicationController
   end
 
   def add_player
-    @game_session.players << User.find(current_user.id) if @game_session.players.count < 8
+    if @game_session.players.count < 8
+      @game_session.players << User.find(current_user.id)
+    end
   end
 end

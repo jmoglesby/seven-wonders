@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ScoreCardsController < ApplicationController
-  before_action :set_game_session, only: [:new, :create]
+  before_action :set_game_session, only: %i[new create]
 
   def new
     @score_card = @game_session.score_cards.new

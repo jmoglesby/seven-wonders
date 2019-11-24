@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateScoreCards < ActiveRecord::Migration[6.0]
   def change
     create_table :score_cards do |t|
