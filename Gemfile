@@ -39,7 +39,14 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
+  gem 'cucumber'
+  gem 'data_magic'
+  gem 'faker'
+  gem 'page-object', '~> 2.2.6'
+  gem 'rake'
+  gem 'require_all'
+  gem 'rspec'
+  gem 'watir'
   gem 'webdrivers'
 end
 
